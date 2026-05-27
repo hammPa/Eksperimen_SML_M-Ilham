@@ -4,7 +4,7 @@ import numpy as np
 import os
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
-def preprocess(input_path='heart_disease_uci_raw.csv', output_path='preprocessing/heart_disease_uci_processing.csv'):
+def preprocess(input_path='heart_disease_uci_raw.csv', output_path='preprocessing/heart_disease_uci_preprocessing.csv'):
     """
     Melakukan preprocessing otomatis pada dataset Heart Disease UCI.
     Mengembalikan DataFrame yang sudah siap dilatih dan menyimpannya ke CSV.
