@@ -1,0 +1,40 @@
+name: Preprocess Dataset
+
+on:
+  push:
+    paths:
+      - 'heart_disease_uci.csv'
+      - 'preprocessing/automate_M-Ilham.py'
+  workflow_dispatch:
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4   # Diperbarui ke versi terbaru
+
+      - name: Setup Python
+        uses: actions/setup-python@v5 # Diperbarui ke versi terbaru
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install pandas numpy scikit-learn
+
+      - name: Run preprocessing script
+        run: python preprocessing/automate_M-Ilham.py
+
+      - name: Verify output file
+        run: |
+          echo "Files in preprocessing folder:"
+          ls -la preprocessing/
+
+      - name: Commit and push updated dataset
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automated preprocessing - update heart_disease_uci_preprocessing.csv"
+          file_pattern: 'preprocessing/heart_disease_uci_preprocessing.csv'
